@@ -38,12 +38,14 @@ public class HomeFragment extends Fragment
             @Override
             public void run()
             {
-                PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewDao.getReviews());
+                if (reviewDao.getReviews() != null) {
+                    PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewDao.getReviews());
 
-                RecyclerView recyclerView = view.findViewById(R.id.all_post_recyclerView);
+                    RecyclerView recyclerView = view.findViewById(R.id.all_post_recyclerView);
 
-                recyclerView.setAdapter(postsAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+                    recyclerView.setAdapter(postsAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+                }
             }
         }).start();
 
