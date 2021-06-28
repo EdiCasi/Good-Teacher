@@ -33,12 +33,22 @@ public class HomeFragment extends Fragment
         ReviewDatabase reviewDatabase = ReviewDatabase.getReviewDatabase(getActivity().getApplicationContext());
         ReviewDao reviewDao = reviewDatabase.reviewDao();
 
-        PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewDao.getReviews());
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewDao.getReviews());
 
-        RecyclerView recyclerView = view.findViewById(R.id.all_post_recyclerView);
+                RecyclerView recyclerView = view.findViewById(R.id.all_post_recyclerView);
 
-        recyclerView.setAdapter(postsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+                recyclerView.setAdapter(postsAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+            }
+        }).start();
+
+
+
 
         return view;
     }

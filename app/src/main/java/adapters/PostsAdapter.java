@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import review_data_access.ReviewEntity;
@@ -20,9 +18,9 @@ import review_data_access.ReviewEntity;
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHolder>
 {
     private Context context;
-    private LiveData<List<ReviewEntity>> reviewEntity;
+    private List<ReviewEntity> reviewEntity;
 
-    public PostsAdapter(Context ct, LiveData<List<ReviewEntity>> reviewEntity)
+    public PostsAdapter(Context ct, List<ReviewEntity> reviewEntity)
     {
         this.context = ct;
         this.reviewEntity = reviewEntity;
@@ -42,15 +40,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostsViewHol
     @Override
     public void onBindViewHolder(@NonNull PostsViewHolder holder, int position)
     {
-        holder.name.setText(reviewEntity.getValue().get(position).getProfessorName());
-        holder.description.setText(reviewEntity.getValue().get(position).getProfessorDescription());
-        holder.grade.setText(reviewEntity.getValue().get(position).getProfessorGrade());
+        holder.name.setText(reviewEntity.get(position).getProfessorName());
+        holder.description.setText(reviewEntity.get(position).getProfessorDescription());
+        holder.grade.setText(reviewEntity.get(position).getProfessorGrade());
     }
 
     @Override
     public int getItemCount()
     {
-        return reviewEntity.getValue().size();
+        return reviewEntity.size();
     }
 
     public class PostsViewHolder extends RecyclerView.ViewHolder
