@@ -1,11 +1,9 @@
 package review_data_access;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -17,6 +15,6 @@ public interface ReviewDao
     @Query("SELECT * FROM reviews")
     List<ReviewEntity> getReviews();
 
-    @Query("SELECT * FROM reviews WHERE id =(:userxId)")
-    List<ReviewEntity> getReviewsFromLoggedUser(Integer userxId);
+    @Query("SELECT * FROM reviews WHERE id =(:userId)")
+    List<ReviewEntity> getReviewsFromLoggedUser(Integer userId);
 }
