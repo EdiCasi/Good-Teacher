@@ -8,8 +8,6 @@ import androidx.room.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-import user_data_access.UserEntity;
-
 @Dao
 public interface ReviewDao
 {
@@ -19,7 +17,4 @@ public interface ReviewDao
     @Query("SELECT * FROM reviews")
     List<ReviewEntity> getReviews();
 
-
-    @Query("SELECT * FROM reviews WHERE userId =:userId")
-    List<ReviewEntity> getReviewsFromLoggedUser(Integer userId);
 }
