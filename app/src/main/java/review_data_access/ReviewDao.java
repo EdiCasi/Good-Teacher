@@ -16,4 +16,7 @@ public interface ReviewDao
 
     @Query("SELECT * FROM reviews")
     List<ReviewEntity> getReviews();
+
+    @Query("SELECT * FROM reviews WHERE id =(:userxId)")
+    List<ReviewEntity> getReviewsFromLoggedUser(Integer userxId);
 }
