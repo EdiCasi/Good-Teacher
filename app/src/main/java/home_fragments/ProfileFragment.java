@@ -13,10 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.R;
 
+import java.util.Collections;
+import java.util.List;
+
 import adapters.PostsAdapter;
 import login_fragments.LoginFragment;
 import review_data_access.ReviewDao;
 import review_data_access.ReviewDatabase;
+import review_data_access.ReviewEntity;
 
 public class ProfileFragment extends Fragment
 {
@@ -36,9 +40,9 @@ public class ProfileFragment extends Fragment
             {
                 if (reviewDao.getReviewsFromLoggedUser(LoginFragment.loggedUser.getId()) != null)
                 {
-
-                    PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(),
-                            reviewDao.getReviewsFromLoggedUser(LoginFragment.loggedUser.getId()));
+                    List<ReviewEntity> reviewEntities = reviewDao.getReviewsFromLoggedUser(LoginFragment.loggedUser.getId());
+                    Collections.reverse(reviewEntities);
+                    PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewEntities);
 
                     RecyclerView recyclerView = view.findViewById(R.id.profile_recyclerView);
 

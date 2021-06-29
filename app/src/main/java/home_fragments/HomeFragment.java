@@ -13,13 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.ColumnInfo;
 
 import com.example.user.R;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import activities.HomeActivity;
 import adapters.PostsAdapter;
 import review_data_access.ReviewDao;
 import review_data_access.ReviewDatabase;
+import review_data_access.ReviewEntity;
 import user_data_access.UserEntity;
 
 public class HomeFragment extends Fragment
@@ -41,7 +47,10 @@ public class HomeFragment extends Fragment
             {
                 if (reviewDao.getReviews() != null)
                 {
-                    PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewDao.getReviews());
+                    List<ReviewEntity> reviewEntities = reviewDao.getReviews();
+                    Collections.reverse(reviewEntities);
+                    
+                    PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewEntities);
 
                     RecyclerView recyclerView = view.findViewById(R.id.all_post_recyclerView);
 
