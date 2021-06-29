@@ -15,5 +15,5 @@ public interface ReviewDao
     void postReview(ReviewEntity reviewEntity);
 
     @Query("SELECT * FROM reviews")
-    LiveData<List<ReviewEntity>> getReviews();
+    List<ReviewEntity> getReviews();
 }
