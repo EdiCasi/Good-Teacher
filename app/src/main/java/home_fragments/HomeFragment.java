@@ -49,14 +49,13 @@ public class HomeFragment extends Fragment
                 {
                     List<ReviewEntity> reviewEntities = reviewDao.getReviews();
                     Collections.reverse(reviewEntities);
-                    
+
                     PostsAdapter postsAdapter = new PostsAdapter(getActivity().getApplicationContext(), reviewEntities);
 
                     RecyclerView recyclerView = view.findViewById(R.id.all_post_recyclerView);
 
                     recyclerView.setAdapter(postsAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-
                 }
             }
         }).start();
