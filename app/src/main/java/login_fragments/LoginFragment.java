@@ -1,5 +1,7 @@
 package login_fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,10 @@ import android.widget.Toast;
 
 import com.example.user.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import BackgroundServices.MyBackgroundProcess;
 import activities.HomeActivity;
 import user_data_access.UserDao;
 import user_data_access.UserDatabase;
@@ -82,10 +88,25 @@ public class LoginFragment extends Fragment
             public void onClick(View v)
             {
                 validateCredentials(userId.getText().toString(), password.getText().toString());
+
+                startBackgroundProcess();
+
             }
         });
 
         return view;
+    }
+
+    public void startBackgroundProcess()
+    {
+        Intent intent = new Intent(getActivity().getApplicationContext(), MyBackgroundProcess.class);
+        intent.setAction("BackgroundProcess");
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(), 0, intent, 0);
+
+        AlarmManager alarmManager = (AlarmManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().ALARM_SERVICE);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, 0, 10, pendingIntent);
     }
 
     private void validateCredentials(String userId, String password)
